@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import html2canvas from 'html2canvas'
+import { toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
 
 import StepPersonal from "./steps/StepPersonal"
@@ -13,6 +13,7 @@ import StepContact from "./steps/StepContact"
 import StepCustomFields from "./steps/StepCustomFields"
 import StepTemplate from "./steps/StepTemplate"
 import ProgressBar from "./ProgressBar"
+import ErrorBoundary from "./ErrorBoundary"
 
 import TraditionalTemplate from "./templates/TraditionalTemplate"
 import RoyalTemplate from "./templates/RoyalTemplate"
@@ -55,12 +56,15 @@ const StepForm = () => {
   const prevStep = () => setStep(step - 1)
 
   const onSubmit = async (data) => {
+    console.log("Submitting form...", data);
     await new Promise((r) => setTimeout(r, 1000))
     const completeData = {
       ...data,
       photo: photoPreview,
       customFields: customFields
     }
+    console.log("Complete Data:", completeData);
+    console.log("Selected Template:", selectedTemplate);
     setFormData(completeData)
     setShowBiodata(true)
   }
@@ -68,18 +72,29 @@ const StepForm = () => {
   // Handle PDF Download
   const downloadPDF = async () => {
     const element = document.getElementById('biodata-template');
-    if (!element) return;
+    if (!element) {
+      alert("Template element not found!");
+      return;
+    }
 
-    // Show loading state if we had one for this button, but for now just async
     try {
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#ffffff', // Ensure white background for PDF
-        logging: false
+      // 1. Generate PNG using html-to-image
+      // Force a fixed width (794px ~ A4 width at 96DPI) to ensure consistent rendering
+      const dataUrl = await toPng(element, {
+        quality: 1.0,
+        pixelRatio: 2,
+        backgroundColor: '#fffcf5', // Match template bg
+        width: 794,
+        style: {
+          layout: "fixed",
+          width: "794px",
+          height: "auto",
+          maxHeight: "none",
+          overflow: "visible"
+        }
       });
 
-      const imgData = canvas.toDataURL('image/png');
+      // 2. Generate PDF
       const pdf = new jsPDF({
         orientation: 'p',
         unit: 'mm',
@@ -88,55 +103,74 @@ const StepForm = () => {
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = canvas.width;
-      const imgHeight = canvas.height;
 
-      // Calculate height maintaining aspect ratio based on A4 width
-      const ratio = pdfWidth / imgWidth;
-      const imgComponentHeight = imgHeight * ratio;
+      // Load image to get dimensions
+      const imgProps = pdf.getImageProperties(dataUrl);
+      const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgComponentHeight);
+      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, imgHeight);
       pdf.save(`Biodata_${formData.firstName || 'User'}.pdf`);
+
     } catch (error) {
-      console.error("PDF generation failed", error);
-      alert("Failed to generate PDF. Please try again.");
+      console.error("PDF generation failed:", error);
+      alert(`Failed to generate PDF. Error: ${error.message || error}`);
     }
   };
 
   // Render biodata template
   if (showBiodata && formData) {
     return (
-      <div className="min-h-screen bg-gray-100 py-8 print:py-0">
-        <div className="max-w-6xl mx-auto px-4 print:px-0">
-          {/* Action Buttons - Hidden on print */}
-          <div className="flex justify-center gap-4 mb-8 print:hidden">
-            <button
-              onClick={downloadPDF}
-              className="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-blue-700 transition-all flex items-center gap-2"
-            >
-              <span>📥</span> Download PDF
-            </button>
-            <button
-              onClick={() => window.print()}
-              className="bg-green-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-green-700 transition-all flex items-center gap-2"
-            >
-              <span>🖨️</span> Print
-            </button>
-            <button
-              onClick={handleReset}
-              className="bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-gray-700 transition-all"
-            >
-              ← Create New
-            </button>
-          </div>
+      <ErrorBoundary>
+        <div className="min-h-screen bg-gray-100 py-8 print:py-0 overflow-auto">
+          <div className="w-full flex justify-center px-4 print:px-0">
+            <div className="w-full max-w-[210mm]">
+              {/* Action Buttons - Hidden on print */}
+              <div className="flex justify-center gap-4 mb-8 print:hidden">
+                <button
+                  onClick={downloadPDF}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-blue-700 transition-all flex items-center gap-2"
+                >
+                  <span>📥</span> Download PDF
+                </button>
+                <button
+                  onClick={() => window.print()}
+                  className="bg-green-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-green-700 transition-all flex items-center gap-2"
+                >
+                  <span>🖨️</span> Print
+                </button>
+                <button
+                  onClick={() => { setShowBiodata(false); setStep(1); }}
+                  className="bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-gray-700 transition-all"
+                >
+                  ← Create New
+                </button>
+              </div>
 
-          {/* Template Display */}
-          {selectedTemplate === 'traditional' && <TraditionalTemplate data={formData} />}
-          {selectedTemplate === 'royal' && <RoyalTemplate data={formData} />}
-          {selectedTemplate === 'modern' && <ModernTemplate data={formData} />}
-          {selectedTemplate === 'elegant' && <ElegantTemplate data={formData} />}
+              {/* Template Display */}
+              <div id="biodata-template-container">
+                {selectedTemplate === 'traditional' && <TraditionalTemplate data={formData} />}
+                {selectedTemplate === 'royal' && <RoyalTemplate data={formData} />}
+                {selectedTemplate === 'modern' && <ModernTemplate data={formData} />}
+                {selectedTemplate === 'elegant' && <ElegantTemplate data={formData} />}
+
+                {/* Fallback for invalid/missing template */}
+                {!['traditional', 'royal', 'modern', 'elegant'].includes(selectedTemplate) && (
+                  <div className="text-center p-10 bg-red-50 border border-red-200 rounded-xl">
+                    <h3 className="text-xl text-red-800 font-bold mb-2">Template Error</h3>
+                    <p className="text-red-600 mb-4">The selected template "{selectedTemplate}" could not be loaded.</p>
+                    <button
+                      onClick={() => setSelectedTemplate('traditional')}
+                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                    >
+                      Reset to Default Template
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </ErrorBoundary>
     )
   }
 
@@ -227,5 +261,7 @@ const StepForm = () => {
     </div>
   )
 }
+
+
 
 export default StepForm

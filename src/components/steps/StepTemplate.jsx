@@ -32,7 +32,7 @@ const StepTemplate = ({ selectedTemplate, setSelectedTemplate }) => {
             color: 'bg-red-900',
             border: 'border-red-800',
             preview: (
-                <div className="w-full h-full bg-[#fffcf5] p-2 flex flex-col gap-1 relative overflow-hidden border border-red-100">
+                <div className="w-full h-full bg-[#fffcf5] p-2 flex flex-col gap-1 relative overflow-hidden border-2 border-red-200">
                     <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-red-800 rounded-tr-lg"></div>
                     <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-red-800 rounded-bl-lg"></div>
 
@@ -43,12 +43,12 @@ const StepTemplate = ({ selectedTemplate, setSelectedTemplate }) => {
 
                     <div className="flex justify-center my-1 relative">
                         <div className="absolute inset-0 bg-red-900/10 blur-sm rounded-full transform scale-75"></div>
-                        <div className="w-10 h-12 bg-gray-200 border-2 border-red-200 rounded-t-2xl rounded-b-md relative z-10"></div>
+                        <div className="w-10 h-12 bg-gray-200 border-2 border-red-900 rounded-t-2xl rounded-b-md relative z-10"></div>
                     </div>
 
                     <div className="space-y-1 px-2 text-center">
-                        <div className="h-1 w-20 bg-red-900/40 mx-auto rounded"></div>
-                        <div className="h-0.5 w-12 bg-red-900/20 mx-auto rounded"></div>
+                        <div className="h-1 w-20 bg-red-900/60 mx-auto rounded"></div>
+                        <div className="h-0.5 w-12 bg-red-900/40 mx-auto rounded"></div>
                     </div>
                 </div>
             )
