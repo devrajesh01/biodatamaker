@@ -25,7 +25,7 @@ const RoyalTemplate = ({ data }) => {
                     <div className="absolute top-2 left-2 right-2 bottom-2 border border-red-900/5 pointer-events-none"></div>
 
                     {/* NEW SPLIT HEADER */}
-                    <header className="flex flex-row items-center justify-between mb-8 border-b border-red-900/10 pb-6">
+                    <header className="flex flex-row items-center justify-between mb-6 border-b border-red-900/10 pb-4">
                         {/* Left: Text Info */}
                         <div className="text-left flex-1 pr-8">
                             <h1 className="text-3xl font-serif font-bold text-red-900 mb-1 tracking-widest" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -43,24 +43,24 @@ const RoyalTemplate = ({ data }) => {
 
                         {/* Right: Photo */}
                         <div className="flex-shrink-0">
-                            <div className="relative group w-40 h-48 overflow-hidden rounded-lg border border-red-900/20 shadow-md">
+                            <div className="relative group h-64 w-auto min-w-[150px] max-w-[250px] overflow-hidden rounded-lg border border-red-900/20 shadow-md flex justify-center bg-red-50">
                                 {data.photo ? (
                                     <>
-                                        {/* Background Blur Layer - Fills the box */}
+                                        {/* Background Blur Layer - Fills the box (Optional now, but good for loading/transparency) */}
                                         <div
                                             className="absolute inset-0 bg-cover bg-center blur-sm opacity-50 scale-110"
                                             style={{ backgroundImage: `url(${data.photo})` }}
                                         ></div>
 
-                                        {/* Main Image Layer - Shows full content */}
+                                        {/* Main Image Layer - Auto width, Full Height */}
                                         <img
                                             src={data.photo}
                                             alt="Profile"
-                                            className="relative w-full h-full object-contain z-10"
+                                            className="relative h-full w-auto object-cover z-10"
                                         />
                                     </>
                                 ) : (
-                                    <div className="w-full h-full bg-red-50 flex items-center justify-center relative z-10">
+                                    <div className="w-40 h-full flex items-center justify-center relative z-10">
                                         <span className="text-red-900/20 text-4xl">❦</span>
                                     </div>
                                 )}
