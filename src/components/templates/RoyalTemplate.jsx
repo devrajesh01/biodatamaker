@@ -6,7 +6,7 @@ const RoyalTemplate = ({ data }) => {
     if (!data) return <div className="p-10 text-center text-red-800">Error: No data available</div>;
 
     return (
-        <div className="w-[210mm] min-h-[297mm] mx-auto shadow-2xl overflow-hidden relative print:shadow-none" id="biodata-template" style={{ backgroundColor: '#fffcf5' }}>
+        <div className="w-full md:w-[210mm] min-h-[297mm] mx-auto shadow-2xl overflow-hidden relative print:shadow-none print:w-[210mm]" id="biodata-template" style={{ backgroundColor: '#fffcf5' }}>
             {/* Background Texture/Watermark */}
             <div className="absolute inset-0 opacity-5 pointer-events-none"
                 style={{
@@ -19,21 +19,21 @@ const RoyalTemplate = ({ data }) => {
             ></div>
 
             {/* Main Content Border */}
-            <div className="relative z-0 h-full p-8 md:p-10">
-                <div className="border-2 border-red-900/10 h-full p-6 relative">
+            <div className="relative z-0 h-full p-4 sm:p-6 md:p-10">
+                <div className="border-2 border-red-900/10 h-full p-3 sm:p-4 md:p-6 relative">
                     {/* Inner hairline border */}
                     <div className="absolute top-2 left-2 right-2 bottom-2 border border-red-900/5 pointer-events-none"></div>
 
                     {/* NEW SPLIT HEADER */}
-                    <header className="flex flex-row items-center justify-between mb-6 border-b border-red-900/10 pb-4">
+                    <header className="flex flex-col md:flex-row items-center md:items-center justify-between mb-4 md:mb-6 border-b border-red-900/10 pb-3 md:pb-4">
                         {/* Left: Text Info */}
-                        <div className="text-left flex-1 pr-8">
-                            <h1 className="text-3xl font-serif font-bold text-red-900 mb-1 tracking-widest" style={{ fontFamily: 'Playfair Display, serif' }}>
+                        <div className="text-center md:text-left flex-1 md:pr-8 mb-4 md:mb-0">
+                            <h1 className="text-2xl sm:text-3xl md:text-3xl font-serif font-bold text-red-900 mb-1 tracking-widest" style={{ fontFamily: 'Playfair Display, serif' }}>
                                 BIODATA
                             </h1>
-                            <div className="w-12 h-1 bg-red-900 mb-4"></div>
+                            <div className="w-12 h-1 bg-red-900 mb-3 md:mb-4 mx-auto md:mx-0"></div>
 
-                            <h2 className="text-2xl font-serif text-red-950 font-bold mb-1">
+                            <h2 className="text-xl sm:text-2xl md:text-2xl font-serif text-red-950 font-bold mb-1">
                                 {data.firstName || 'First Name'} <span className="text-red-800">{data.lastName || 'Last Name'}</span>
                             </h2>
                             <p className="text-red-900/60 text-sm italic mb-2">
@@ -43,7 +43,7 @@ const RoyalTemplate = ({ data }) => {
 
                         {/* Right: Photo */}
                         <div className="flex-shrink-0">
-                            <div className="relative group h-64 w-auto min-w-[150px] max-w-[250px] overflow-hidden rounded-lg border border-red-900/20 shadow-md flex justify-center bg-red-50">
+                            <div className="relative group h-48 sm:h-56 md:h-64 w-auto min-w-[120px] sm:min-w-[150px] max-w-[180px] sm:max-w-[220px] md:max-w-[250px] overflow-hidden rounded-lg border border-red-900/20 shadow-md flex justify-center bg-red-50 mx-auto md:mx-0">
                                 {data.photo ? (
                                     <>
                                         {/* Background Blur Layer - Fills the box (Optional now, but good for loading/transparency) */}
@@ -69,14 +69,14 @@ const RoyalTemplate = ({ data }) => {
                     </header>
 
                     {/* NEW COMPACT FULL-WIDTH BODY */}
-                    <div className="space-y-6">
+                    <div className="space-y-4 md:space-y-6">
 
                         {/* Personal & Family Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
 
                             {/* Personal Details */}
                             <div className="relative">
-                                <h3 className="text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-3 flex items-center gap-2">
+                                <h3 className="text-base sm:text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-2 md:mb-3 flex items-center gap-2">
                                     <span className="text-xl">❧</span> Personal Details
                                 </h3>
                                 <div className="grid grid-cols-[100px_1fr] gap-y-1.5 text-sm text-red-950/90">
@@ -90,7 +90,7 @@ const RoyalTemplate = ({ data }) => {
 
                             {/* Family Details */}
                             <div className="relative">
-                                <h3 className="text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-3 flex items-center gap-2">
+                                <h3 className="text-base sm:text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-2 md:mb-3 flex items-center gap-2">
                                     <span className="text-xl">❧</span> Family Background
                                 </h3>
                                 <div className="grid grid-cols-[100px_1fr] gap-y-1.5 text-sm text-red-950/90">
@@ -108,10 +108,10 @@ const RoyalTemplate = ({ data }) => {
                         </div>
 
                         {/* Education & Spiritual Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                             {/* Education & Career */}
                             <div className="relative">
-                                <h3 className="text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-3 flex items-center gap-2">
+                                <h3 className="text-base sm:text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-2 md:mb-3 flex items-center gap-2">
                                     <span className="text-xl">❧</span> Education & Career
                                 </h3>
                                 <div className="grid grid-cols-[100px_1fr] gap-y-1.5 text-sm text-red-950/90">
@@ -125,7 +125,7 @@ const RoyalTemplate = ({ data }) => {
                             {/* Spiritual (Conditional) */}
                             {data.religion && (
                                 <div className="relative">
-                                    <h3 className="text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-3 flex items-center gap-2">
+                                    <h3 className="text-base sm:text-lg font-serif font-bold text-red-900 border-b border-red-900/20 pb-1 mb-2 md:mb-3 flex items-center gap-2">
                                         <span className="text-xl">❧</span> Spiritual
                                     </h3>
                                     <div className="grid grid-cols-[100px_1fr] gap-y-1.5 text-sm text-red-950/90">
@@ -139,13 +139,13 @@ const RoyalTemplate = ({ data }) => {
                         </div>
 
                         {/* Contact - Compact Row */}
-                        <div className="mt-8 pt-4 border-t border-red-900/10">
-                            <div className="flex flex-wrap justify-between items-center gap-4 bg-red-50/50 p-3 rounded-lg border border-red-900/5">
-                                <div className="font-serif font-bold text-red-900 text-base flex items-center gap-2">
+                        <div className="mt-6 md:mt-8 pt-3 md:pt-4 border-t border-red-900/10">
+                            <div className="flex flex-wrap justify-between items-center gap-3 md:gap-4 bg-red-50/50 p-2 md:p-3 rounded-lg border border-red-900/5">
+                                <div className="font-serif font-bold text-red-900 text-sm sm:text-base flex items-center gap-2">
                                     <span className="text-xl">📞</span> Contact Info
                                 </div>
 
-                                <div className="flex flex-wrap gap-6 text-sm text-red-950 font-medium">
+                                <div className="flex flex-wrap gap-3 md:gap-6 text-xs sm:text-sm text-red-950 font-medium">
                                     {data.phone && <span>Phone: {data.phone}</span>}
                                     {data.email && <span>Email: {data.email}</span>}
                                 </div>
