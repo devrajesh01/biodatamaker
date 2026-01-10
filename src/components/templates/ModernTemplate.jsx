@@ -36,6 +36,10 @@ const ModernTemplate = ({ data }) => {
                         {data.height && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Height</span><span className="text-gray-900 font-semibold">{data.height}</span></div>}
                         {data.complexion && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Complexion</span><span className="text-gray-900 font-semibold">{data.complexion}</span></div>}
                         {data.bloodGroup && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Blood Group</span><span className="text-gray-900 font-semibold">{data.bloodGroup}</span></div>}
+                        {/* Custom Fields - Personal & Physical */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Personal' || f.section === 'Physical').map((field, idx) => (
+                            <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
+                        ))}
                     </div>
                 </div>
 
@@ -52,6 +56,10 @@ const ModernTemplate = ({ data }) => {
                             <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Religion</span><span className="text-gray-900 font-semibold">{data.religion}</span></div>
                             {data.caste && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Caste</span><span className="text-gray-900 font-semibold">{data.caste}</span></div>}
                             {data.gotra && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Gotra</span><span className="text-gray-900 font-semibold">{data.gotra}</span></div>}
+                            {/* Custom Fields - Religious */}
+                            {data.customFields && data.customFields.filter(f => f.section === 'Religious').map((field, idx) => (
+                                <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
+                            ))}
                         </div>
                     </div>
                 )}
@@ -68,6 +76,13 @@ const ModernTemplate = ({ data }) => {
                         <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Father</span><span className="text-gray-900 font-semibold">{data.fatherName || 'N/A'}</span></div>
                         {data.fatherOccupation && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Father's Occupation</span><span className="text-gray-900 font-semibold">{data.fatherOccupation}</span></div>}
                         <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Mother</span><span className="text-gray-900 font-semibold">{data.motherName || 'N/A'}</span></div>
+                        {data.motherOccupation && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Mother's Occupation</span><span className="text-gray-900 font-semibold">{data.motherOccupation}</span></div>}
+                        {data.brothers && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Brothers</span><span className="text-gray-900 font-semibold">{data.brothers}</span></div>}
+                        {data.sisters && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Sisters</span><span className="text-gray-900 font-semibold">{data.sisters}</span></div>}
+                        {/* Custom Fields - Family */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Family').map((field, idx) => (
+                            <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
+                        ))}
                     </div>
                 </div>
 
@@ -82,6 +97,10 @@ const ModernTemplate = ({ data }) => {
                     <div className="space-y-2 text-sm">
                         <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Qualification</span><span className="text-gray-900 font-semibold">{data.qualification || 'N/A'}</span></div>
                         {data.university && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">University</span><span className="text-gray-900 font-semibold">{data.university}</span></div>}
+                        {/* Custom Fields - Education */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Education').map((field, idx) => (
+                            <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
+                        ))}
                     </div>
                 </div>
 
@@ -98,6 +117,10 @@ const ModernTemplate = ({ data }) => {
                             <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Occupation</span><span className="text-gray-900 font-semibold">{data.occupation}</span></div>
                             {data.company && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Company</span><span className="text-gray-900 font-semibold">{data.company}</span></div>}
                             {data.income && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Income</span><span className="text-gray-900 font-semibold">{data.income}</span></div>}
+                            {/* Custom Fields - Professional */}
+                            {data.customFields && data.customFields.filter(f => f.section === 'Professional').map((field, idx) => (
+                                <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
+                            ))}
                         </div>
                     </div>
                 )}
@@ -113,24 +136,13 @@ const ModernTemplate = ({ data }) => {
                     <div className="space-y-2 text-sm">
                         <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Email</span><span className="text-gray-900 font-semibold text-xs">{data.email || 'N/A'}</span></div>
                         <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Phone</span><span className="text-gray-900 font-semibold">{data.phone || 'N/A'}</span></div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Custom Fields */}
-            {data.customFields && data.customFields.length > 0 && (
-                <div className="bg-white p-5 rounded-2xl shadow-lg mt-5">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">Additional Information</h2>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                        {data.customFields.map((field, index) => (
-                            <div key={index} className="flex justify-between border-b border-gray-200 pb-2">
-                                <span className="text-gray-600 font-medium">{field.name}</span>
-                                <span className="text-gray-900 font-semibold">{field.value}</span>
-                            </div>
+                        {/* Custom Fields - Contact */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
+                            <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
                         ))}
                     </div>
                 </div>
-            )}
+            </div>
 
             {/* Footer */}
             <div className="mt-8 text-center">

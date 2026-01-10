@@ -10,7 +10,6 @@ import StepFamily from "./steps/StepFamily"
 import StepEducation from "./steps/StepEducation"
 import StepProfessional from "./steps/StepProfessional"
 import StepContact from "./steps/StepContact"
-import StepCustomFields from "./steps/StepCustomFields"
 import StepTemplate from "./steps/StepTemplate"
 import ProgressBar from "./ProgressBar"
 import ErrorBoundary from "./ErrorBoundary"
@@ -43,9 +42,8 @@ const StepForm = () => {
     5: ["qualification", "university", "year"],
     6: ["occupation"],
     7: ["email", "phone"],
-    8: [], // Custom fields - no validation
-    9: [], // Template selection - no validation
-    10: [], // Review - no validation
+    8: [], // Template selection - no validation
+    9: [], // Review - no validation
   }
 
   const nextStep = async () => {
@@ -191,7 +189,7 @@ const StepForm = () => {
           </p>
         </div>
 
-        <ProgressBar step={step} totalSteps={10} />
+        <ProgressBar step={step} totalSteps={9} />
 
         {/* SLIDE CONTAINER */}
         <div className="relative h-[550px] overflow-hidden mb-8">
@@ -206,10 +204,9 @@ const StepForm = () => {
             <StepEducation register={register} errors={errors} customFields={customFields} setCustomFields={setCustomFields} />
             <StepProfessional register={register} errors={errors} customFields={customFields} setCustomFields={setCustomFields} />
             <StepContact register={register} errors={errors} customFields={customFields} setCustomFields={setCustomFields} />
-            <StepCustomFields customFields={customFields} setCustomFields={setCustomFields} />
             <StepTemplate selectedTemplate={selectedTemplate} setSelectedTemplate={setSelectedTemplate} />
 
-            {/* Step 10: Review */}
+            {/* Step 9: Review */}
             <div className="w-full flex-shrink-0 px-2 animate-slideIn">
               <div className="text-center">
                 <h3 className="text-white text-2xl font-bold mb-4">Ready to Generate!</h3>
@@ -235,13 +232,13 @@ const StepForm = () => {
             <div></div>
           )}
 
-          {step < 10 && (
+          {step < 9 && (
             <button type="button" onClick={nextStep} className="btn-primary ml-auto">
               Next →
             </button>
           )}
 
-          {step === 10 && (
+          {step === 9 && (
             <button type="submit" disabled={isSubmitting} className="btn-success ml-auto">
               {isSubmitting ? (
                 <span className="flex items-center gap-2">

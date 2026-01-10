@@ -1,4 +1,4 @@
-const ProgressBar = ({ step, totalSteps = 10 }) => {
+const ProgressBar = ({ step, totalSteps = 9 }) => {
   const steps = [
     { number: 1, label: "Personal" },
     { number: 2, label: "Physical" },
@@ -7,9 +7,8 @@ const ProgressBar = ({ step, totalSteps = 10 }) => {
     { number: 5, label: "Education" },
     { number: 6, label: "Professional" },
     { number: 7, label: "Contact" },
-    { number: 8, label: "Custom" },
-    { number: 9, label: "Template" },
-    { number: 10, label: "Review" }
+    { number: 8, label: "Template" },
+    { number: 9, label: "Review" }
   ]
 
   return (

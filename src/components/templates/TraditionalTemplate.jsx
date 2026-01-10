@@ -45,6 +45,10 @@ const TraditionalTemplate = ({ data }) => {
                                 {data.height && <div><span className="font-semibold text-gray-700">Height:</span> <span className="text-gray-900">{data.height}</span></div>}
                                 {data.complexion && <div><span className="font-semibold text-gray-700">Complexion:</span> <span className="text-gray-900">{data.complexion}</span></div>}
                                 {data.bloodGroup && <div><span className="font-semibold text-gray-700">Blood Group:</span> <span className="text-gray-900">{data.bloodGroup}</span></div>}
+                                {/* Custom Fields - Personal & Physical */}
+                                {data.customFields && data.customFields.filter(f => f.section === 'Personal' || f.section === 'Physical').map((field, idx) => (
+                                    <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
+                                ))}
                             </div>
                         </section>
 
@@ -60,6 +64,10 @@ const TraditionalTemplate = ({ data }) => {
                                     {data.gotra && <div><span className="font-semibold text-gray-700">Gotra:</span> <span className="text-gray-900">{data.gotra}</span></div>}
                                     {data.nakshatra && <div><span className="font-semibold text-gray-700">Nakshatra:</span> <span className="text-gray-900">{data.nakshatra}</span></div>}
                                     {data.rashi && <div><span className="font-semibold text-gray-700">Rashi:</span> <span className="text-gray-900">{data.rashi}</span></div>}
+                                    {/* Custom Fields - Religious */}
+                                    {data.customFields && data.customFields.filter(f => f.section === 'Religious').map((field, idx) => (
+                                        <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
+                                    ))}
                                 </div>
                             </section>
                         )}
@@ -76,6 +84,12 @@ const TraditionalTemplate = ({ data }) => {
                                 {data.motherOccupation && <div><span className="font-semibold text-gray-700">Mother's Occupation:</span> <span className="text-gray-900">{data.motherOccupation}</span></div>}
                                 {data.brothers && <div><span className="font-semibold text-gray-700">Brothers:</span> <span className="text-gray-900">{data.brothers}</span></div>}
                                 {data.sisters && <div><span className="font-semibold text-gray-700">Sisters:</span> <span className="text-gray-900">{data.sisters}</span></div>}
+                                {data.familyType && <div><span className="font-semibold text-gray-700">Family Type:</span> <span className="text-gray-900">{data.familyType}</span></div>}
+                                {data.maritalStatus && <div><span className="font-semibold text-gray-700">Marital Status:</span> <span className="text-gray-900">{data.maritalStatus}</span></div>}
+                                {/* Custom Fields - Family */}
+                                {data.customFields && data.customFields.filter(f => f.section === 'Family').map((field, idx) => (
+                                    <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
+                                ))}
                             </div>
                         </section>
 
@@ -90,6 +104,10 @@ const TraditionalTemplate = ({ data }) => {
                                 {data.occupation && <div><span className="font-semibold text-gray-700">Occupation:</span> <span className="text-gray-900">{data.occupation}</span></div>}
                                 {data.company && <div><span className="font-semibold text-gray-700">Company:</span> <span className="text-gray-900">{data.company}</span></div>}
                                 {data.income && <div><span className="font-semibold text-gray-700">Income:</span> <span className="text-gray-900">{data.income}</span></div>}
+                                {/* Custom Fields - Education & Professional */}
+                                {data.customFields && data.customFields.filter(f => f.section === 'Education' || f.section === 'Professional').map((field, idx) => (
+                                    <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
+                                ))}
                             </div>
                         </section>
 
@@ -101,22 +119,12 @@ const TraditionalTemplate = ({ data }) => {
                             <div className="grid grid-cols-2 gap-3 text-sm">
                                 <div><span className="font-semibold text-gray-700">Email:</span> <span className="text-gray-900">{data.email || 'N/A'}</span></div>
                                 <div><span className="font-semibold text-gray-700">Phone:</span> <span className="text-gray-900">{data.phone || 'N/A'}</span></div>
+                                {/* Custom Fields - Contact */}
+                                {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
+                                    <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
+                                ))}
                             </div>
                         </section>
-
-                        {/* Custom Fields */}
-                        {data.customFields && data.customFields.length > 0 && (
-                            <section className="border-2 border-amber-600 p-4 rounded-lg bg-white">
-                                <h2 className="text-xl font-bold text-amber-800 mb-3 border-b-2 border-amber-300 pb-2">
-                                    ADDITIONAL INFORMATION
-                                </h2>
-                                <div className="grid grid-cols-2 gap-3 text-sm">
-                                    {data.customFields.map((field, index) => (
-                                        <div key={index}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
                     </div>
                 </div>
             </div>

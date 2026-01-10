@@ -85,6 +85,13 @@ const RoyalTemplate = ({ data }) => {
                                     {data.height && <><span className="font-semibold text-red-900">Height:</span> <span>{data.height}</span></>}
                                     {data.complexion && <><span className="font-semibold text-red-900">Complexion:</span> <span>{data.complexion}</span></>}
                                     {data.bloodGroup && <><span className="font-semibold text-red-900">Blood Grp:</span> <span>{data.bloodGroup}</span></>}
+                                    {/* Custom Fields - Personal & Physical */}
+                                    {data.customFields && data.customFields.filter(f => f.section === 'Personal' || f.section === 'Physical').map((field, idx) => (
+                                        <React.Fragment key={idx}>
+                                            <span className="font-semibold text-red-900">{field.name}:</span>
+                                            <span>{field.value}</span>
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             </div>
 
@@ -103,6 +110,14 @@ const RoyalTemplate = ({ data }) => {
                                         </>
                                     )}
                                     {data.familyType && <><span className="font-semibold text-red-900">Type:</span> <span>{data.familyType}</span></>}
+                                    {data.maritalStatus && <><span className="font-semibold text-red-900">Marital Status:</span> <span>{data.maritalStatus}</span></>}
+                                    {/* Custom Fields - Family */}
+                                    {data.customFields && data.customFields.filter(f => f.section === 'Family').map((field, idx) => (
+                                        <React.Fragment key={idx}>
+                                            <span className="font-semibold text-red-900">{field.name}:</span>
+                                            <span>{field.value}</span>
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -119,6 +134,13 @@ const RoyalTemplate = ({ data }) => {
                                     <span className="font-semibold text-red-900">Profession:</span> <span>{data.occupation} {data.company && `at ${data.company}`}</span>
                                     {data.income && <><span className="font-semibold text-red-900">Income:</span> <span>{data.income}</span></>}
                                     {data.workLocation && <><span className="font-semibold text-red-900">Location:</span> <span>{data.workLocation}</span></>}
+                                    {/* Custom Fields - Education & Professional */}
+                                    {data.customFields && data.customFields.filter(f => f.section === 'Education' || f.section === 'Professional').map((field, idx) => (
+                                        <React.Fragment key={idx}>
+                                            <span className="font-semibold text-red-900">{field.name}:</span>
+                                            <span>{field.value}</span>
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             </div>
 
@@ -133,6 +155,10 @@ const RoyalTemplate = ({ data }) => {
                                         {data.gotra && <div><span className="font-semibold text-red-900 block">Gotra:</span> {data.gotra}</div>}
                                         {data.rashi && <div><span className="font-semibold text-red-900 block">Rashi:</span> {data.rashi}</div>}
                                         {data.nakshatra && <div><span className="font-semibold text-red-900 block">Nakshatra:</span> {data.nakshatra}</div>}
+                                        {/* Custom Fields - Religious */}
+                                        {data.customFields && data.customFields.filter(f => f.section === 'Religious').map((field, idx) => (
+                                            <div key={idx}><span className="font-semibold text-red-900 block">{field.name}:</span> {field.value}</div>
+                                        ))}
                                     </div>
                                 </div>
                             )}
@@ -148,6 +174,10 @@ const RoyalTemplate = ({ data }) => {
                                 <div className="flex flex-wrap gap-3 md:gap-6 text-xs sm:text-sm text-red-950 font-medium">
                                     {data.phone && <span>Phone: {data.phone}</span>}
                                     {data.email && <span>Email: {data.email}</span>}
+                                    {/* Custom Fields - Contact */}
+                                    {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
+                                        <span key={idx}>{field.name}: {field.value}</span>
+                                    ))}
                                 </div>
                             </div>
                         </div>

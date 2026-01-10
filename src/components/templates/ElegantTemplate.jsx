@@ -38,6 +38,10 @@ const ElegantTemplate = ({ data }) => {
                         {data.height && <div><p className="text-rose-600 font-semibold">Height</p><p className="text-gray-800 font-medium">{data.height}</p></div>}
                         {data.complexion && <div><p className="text-rose-600 font-semibold">Complexion</p><p className="text-gray-800 font-medium">{data.complexion}</p></div>}
                         {data.bloodGroup && <div><p className="text-rose-600 font-semibold">Blood Group</p><p className="text-gray-800 font-medium">{data.bloodGroup}</p></div>}
+                        {/* Custom Fields - Personal & Physical */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Personal' || f.section === 'Physical').map((field, idx) => (
+                            <div key={idx}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>
+                        ))}
                     </div>
                 </section>
 
@@ -53,6 +57,10 @@ const ElegantTemplate = ({ data }) => {
                             {data.caste && <div><p className="text-rose-600 font-semibold">Caste</p><p className="text-gray-800 font-medium">{data.caste}</p></div>}
                             {data.gotra && <div><p className="text-rose-600 font-semibold">Gotra</p><p className="text-gray-800 font-medium">{data.gotra}</p></div>}
                             {data.nakshatra && <div><p className="text-rose-600 font-semibold">Nakshatra</p><p className="text-gray-800 font-medium">{data.nakshatra}</p></div>}
+                            {/* Custom Fields - Religious */}
+                            {data.customFields && data.customFields.filter(f => f.section === 'Religious').map((field, idx) => (
+                                <div key={idx}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>
+                            ))}
                         </div>
                     </section>
                 )}
@@ -68,6 +76,12 @@ const ElegantTemplate = ({ data }) => {
                         {data.fatherOccupation && <div><p className="text-rose-600 font-semibold">Father's Occupation</p><p className="text-gray-800 font-medium">{data.fatherOccupation}</p></div>}
                         <div><p className="text-rose-600 font-semibold">Mother's Name</p><p className="text-gray-800 font-medium">{data.motherName || 'N/A'}</p></div>
                         {data.motherOccupation && <div><p className="text-rose-600 font-semibold">Mother's Occupation</p><p className="text-gray-800 font-medium">{data.motherOccupation}</p></div>}
+                        {data.brothers && <div><p className="text-rose-600 font-semibold">Brothers</p><p className="text-gray-800 font-medium">{data.brothers}</p></div>}
+                        {data.sisters && <div><p className="text-rose-600 font-semibold">Sisters</p><p className="text-gray-800 font-medium">{data.sisters}</p></div>}
+                        {/* Custom Fields - Family */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Family').map((field, idx) => (
+                            <div key={idx}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>
+                        ))}
                     </div>
                 </section>
 
@@ -82,6 +96,10 @@ const ElegantTemplate = ({ data }) => {
                         {data.university && <div><p className="text-rose-600 font-semibold">University</p><p className="text-gray-800 font-medium">{data.university}</p></div>}
                         {data.occupation && <div><p className="text-rose-600 font-semibold">Occupation</p><p className="text-gray-800 font-medium">{data.occupation}</p></div>}
                         {data.income && <div><p className="text-rose-600 font-semibold">Income</p><p className="text-gray-800 font-medium">{data.income}</p></div>}
+                        {/* Custom Fields - Education & Professional */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Education' || f.section === 'Professional').map((field, idx) => (
+                            <div key={idx}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>
+                        ))}
                     </div>
                 </section>
 
@@ -94,20 +112,12 @@ const ElegantTemplate = ({ data }) => {
                     <div className="grid grid-cols-2 gap-4 ml-8 text-sm">
                         <div><p className="text-rose-600 font-semibold">Email</p><p className="text-gray-800 font-medium text-xs">{data.email || 'N/A'}</p></div>
                         <div><p className="text-rose-600 font-semibold">Phone</p><p className="text-gray-800 font-medium">{data.phone || 'N/A'}</p></div>
+                        {/* Custom Fields - Contact */}
+                        {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
+                            <div key={idx}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>
+                        ))}
                     </div>
                 </section>
-
-                {/* Custom Fields */}
-                {data.customFields && data.customFields.length > 0 && (
-                    <section className="bg-white/60 backdrop-blur-sm p-5 rounded-2xl shadow-md border border-rose-100">
-                        <h2 className="text-2xl font-serif font-bold text-rose-700 mb-4">Additional Information</h2>
-                        <div className="grid grid-cols-2 gap-4 ml-8 text-sm">
-                            {data.customFields.map((field, index) => (
-                                <div key={index}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>
-                            ))}
-                        </div>
-                    </section>
-                )}
             </div>
 
             {/* Decorative Footer */}
