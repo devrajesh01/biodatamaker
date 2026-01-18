@@ -10,7 +10,7 @@ const StepContact = ({ register, errors, customFields, setCustomFields }) => (
       <Input
         type="email"
         placeholder="Email"
-        {...register("email", { required: "Email required" })}
+        {...register("email")}
       />
       {errors.email && <ErrorMessage message={errors.email.message} />}
     </div>
@@ -18,7 +18,7 @@ const StepContact = ({ register, errors, customFields, setCustomFields }) => (
     <div className="relative">
       <Input
         placeholder="Phone Number"
-        {...register("phone", { required: "Phone required" })}
+        {...register("phone")}
       />
       {errors.phone && <ErrorMessage message={errors.phone.message} />}
     </div>

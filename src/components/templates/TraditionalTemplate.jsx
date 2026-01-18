@@ -104,6 +104,7 @@ const TraditionalTemplate = ({ data }) => {
                                 {data.occupation && <div><span className="font-semibold text-gray-700">Occupation:</span> <span className="text-gray-900">{data.occupation}</span></div>}
                                 {data.company && <div><span className="font-semibold text-gray-700">Company:</span> <span className="text-gray-900">{data.company}</span></div>}
                                 {data.income && <div><span className="font-semibold text-gray-700">Income:</span> <span className="text-gray-900">{data.income}</span></div>}
+                                {data.workLocation && <div><span className="font-semibold text-gray-700">Work Location:</span> <span className="text-gray-900">{data.workLocation}</span></div>}
                                 {/* Custom Fields - Education & Professional */}
                                 {data.customFields && data.customFields.filter(f => f.section === 'Education' || f.section === 'Professional').map((field, idx) => (
                                     <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>
@@ -117,8 +118,8 @@ const TraditionalTemplate = ({ data }) => {
                                 CONTACT DETAILS
                             </h2>
                             <div className="grid grid-cols-2 gap-3 text-sm">
-                                <div><span className="font-semibold text-gray-700">Email:</span> <span className="text-gray-900">{data.email || 'N/A'}</span></div>
-                                <div><span className="font-semibold text-gray-700">Phone:</span> <span className="text-gray-900">{data.phone || 'N/A'}</span></div>
+                                {data.email && <div><span className="font-semibold text-gray-700">Email:</span> <span className="text-gray-900">{data.email}</span></div>}
+                                {data.phone && <div><span className="font-semibold text-gray-700">Phone:</span> <span className="text-gray-900">{data.phone}</span></div>}
                                 {/* Custom Fields - Contact */}
                                 {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
                                     <div key={idx}><span className="font-semibold text-gray-700">{field.name}:</span> <span className="text-gray-900">{field.value}</span></div>

@@ -12,7 +12,7 @@ const StepProfessional = ({ register, errors, customFields, setCustomFields }) =
                 <div className="relative">
                     <Input
                         placeholder="Occupation/Profession"
-                        {...register("occupation", { required: "Occupation required" })}
+                        {...register("occupation")}
                     />
                     {errors.occupation && <ErrorMessage message={errors.occupation.message} />}
                 </div>

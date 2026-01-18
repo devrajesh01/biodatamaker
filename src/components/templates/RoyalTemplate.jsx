@@ -131,7 +131,7 @@ const RoyalTemplate = ({ data }) => {
                                 </h3>
                                 <div className="grid grid-cols-[100px_1fr] gap-y-1.5 text-sm text-red-950/90">
                                     <span className="font-semibold text-red-900">Education:</span> <span>{data.qualification} {data.university && `from ${data.university}`}</span>
-                                    <span className="font-semibold text-red-900">Profession:</span> <span>{data.occupation} {data.company && `at ${data.company}`}</span>
+                                    {data.occupation && <><span className="font-semibold text-red-900">Profession:</span> <span>{data.occupation} {data.company && `at ${data.company}`}</span></>}
                                     {data.income && <><span className="font-semibold text-red-900">Income:</span> <span>{data.income}</span></>}
                                     {data.workLocation && <><span className="font-semibold text-red-900">Location:</span> <span>{data.workLocation}</span></>}
                                     {/* Custom Fields - Education & Professional */}

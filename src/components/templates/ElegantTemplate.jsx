@@ -110,8 +110,8 @@ const ElegantTemplate = ({ data }) => {
                         <h2 className="text-2xl font-serif font-bold text-rose-700">Contact Information</h2>
                     </div>
                     <div className="grid grid-cols-2 gap-4 ml-8 text-sm">
-                        <div><p className="text-rose-600 font-semibold">Email</p><p className="text-gray-800 font-medium text-xs">{data.email || 'N/A'}</p></div>
-                        <div><p className="text-rose-600 font-semibold">Phone</p><p className="text-gray-800 font-medium">{data.phone || 'N/A'}</p></div>
+                        {data.email && <div><p className="text-rose-600 font-semibold">Email</p><p className="text-gray-800 font-medium text-xs">{data.email}</p></div>}
+                        {data.phone && <div><p className="text-rose-600 font-semibold">Phone</p><p className="text-gray-800 font-medium">{data.phone}</p></div>}
                         {/* Custom Fields - Contact */}
                         {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
                             <div key={idx}><p className="text-rose-600 font-semibold">{field.name}</p><p className="text-gray-800 font-medium">{field.value}</p></div>

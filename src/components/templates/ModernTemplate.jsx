@@ -134,8 +134,8 @@ const ModernTemplate = ({ data }) => {
                         <h2 className="text-xl font-bold text-gray-800">Contact</h2>
                     </div>
                     <div className="space-y-2 text-sm">
-                        <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Email</span><span className="text-gray-900 font-semibold text-xs">{data.email || 'N/A'}</span></div>
-                        <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Phone</span><span className="text-gray-900 font-semibold">{data.phone || 'N/A'}</span></div>
+                        {data.email && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Email</span><span className="text-gray-900 font-semibold text-xs">{data.email}</span></div>}
+                        {data.phone && <div className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">Phone</span><span className="text-gray-900 font-semibold">{data.phone}</span></div>}
                         {/* Custom Fields - Contact */}
                         {data.customFields && data.customFields.filter(f => f.section === 'Contact').map((field, idx) => (
                             <div key={idx} className="flex justify-between border-b border-gray-200 pb-2"><span className="text-gray-600 font-medium">{field.name}</span><span className="text-gray-900 font-semibold">{field.value}</span></div>
